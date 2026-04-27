@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個人網站</title>
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+}
+
+header{
+    background:#333;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+
+.layout{
+    display:flex;
+}
+
+/* 側邊欄（電腦版） */
+.sidebar{
+    width:200px;
+    background:#f4f4f4;
+    height:100vh;
+    padding-top:20px;
+}
+
+.sidebar button{
+    display:block;
+    width:100%;
+    padding:15px;
+    border:none;
+    background:none;
+    cursor:pointer;
+    text-align:left;
+}
+
+.sidebar button:hover,
+.sidebar button.active{
+    background:#333;
+    color:white;
+}
+
+/* 主內容 */
+.content-area{
+    flex:1;
+    padding:20px;
+}
+
+.content{
+    display:none;
+}
+
+.content.active{
+    display:block;
+}
+
+/* 手機版 */
+.menu-btn{
+    display:none;
+    background:#333;
+    color:white;
+    padding:10px;
+    border:none;
+    width:100%;
+}
+
+@media (max-width: 768px){
+    .layout{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        display:none;
+        width:100%;
+        height:auto;
+    }
+
+    .sidebar.show{
+        display:block;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>黃軒甫 11327033</h1>
+</header>
+
+<!-- 手機版選單按鈕 -->
+<button class="menu-btn" onclick="toggleMenu()">☰ 選單</button>
+
+<div class="layout">
+
+    <!-- 側邊選單 -->
+    <div class="sidebar" id="sidebar">
+        <button class="tabBtn active" onclick="showTab(0)">個人簡介</button>
+        <button class="tabBtn" onclick="showTab(1)">興趣專長</button>
+    </div>
+
+    <!-- 內容區 -->
+    <div class="content-area">
+
+        <!-- 在這裡輸入「個人簡介」內容 -->
+        <div class="content active">
+            <p>我叫做黃軒甫，就讀朝陽科技大學</p>
+        </div>
+
+        <!-- 在這裡輸入「興趣專長」內容 -->
+        <div class="content">
+            <p>我喜歡唱、跳、rap、打籃球</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function showTab(index){
+    const contents = document.querySelectorAll('.content');
+    const buttons = document.querySelectorAll('.tabBtn');
+
+    contents.forEach(c => c.classList.remove('active'));
+    buttons.forEach(b => b.classList.remove('active'));
+
+    contents[index].classList.add('active');
+    buttons[index].classList.add('active');
+
+    // 手機點完自動收起選單
+    document.getElementById('sidebar').classList.remove('show');
+}
+
+function toggleMenu(){
+    document.getElementById('sidebar').classList.toggle('show');
+}
+</script>
+
+</body>
+</html>
